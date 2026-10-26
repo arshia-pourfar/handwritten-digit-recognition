@@ -1,0 +1,41 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Notebooks / Jupyter ---
+.ipynb_checkpoints/
+
+# --- IDE / editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS files ---
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# --- Secrets / local configuration ---
+.env
+.env.*
+*.pem
+
+# --- Logs and generated outputs ---
+*.log
+logs/
+
+# --- Notes ---
+# Trained model weights (*.h5 in models/) and the MNIST dataset copy
+# (datasets/mnist.npz) ARE committed on purpose so the app runs right after
+# cloning. Replace them with your own trained models as needed.

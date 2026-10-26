@@ -1,0 +1,7 @@
+# Verified working environment (Python 3.12.6, Windows).
+# These are the versions currently installed and verified on this machine;
+# the project may also work with other versions.
+tensorflow==2.19.0
+numpy==2.2.6
+opencv-python==4.10.0.84
+matplotlib==3.9.2
