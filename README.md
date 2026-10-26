@@ -33,7 +33,7 @@ interactive menu where you can train a model or predict digits from a folder of 
 ├── src/
 │   ├── training.py         # Dataset loading + MLP and CNN training pipelines
 │   └── prediction.py       # Image discovery, OpenCV preprocessing, batch prediction
-├── images/                 # Prediction input folder (8 sample digit images included)
+├── images/                 # Prediction input folder (sample digit images included)
 ├── models/                 # Trained model weights (.h5)
 ├── datasets/
 │   └── mnist.npz           # MNIST dataset used for training
@@ -183,20 +183,16 @@ menu. You can also replace any checkpoint by copying your own `.h5` file into `m
 
 ## Example Terminal Output
 
-**Illustrative — actual predictions depend on your images and model:**
+**Illustrative — the numbers below show the output format only, not actual results:**
 
 ```text
 Predictions
 -------------------------
-my_digit.png -> 5 (confidence 0.9952)
-my_digit_3_marjan.jpg -> 3 (confidence 0.3771)
-my_digit_5.jpg -> 5 (confidence 1.0000)
-my_digit_5_hard.jpg -> 5 (confidence 0.9992)
-my_digit_6.jpg -> 6 (confidence 0.9757)
-my_digit_6_ali.jpg -> 5 (confidence 0.7662)
-my_digit_7_ali.jpg -> 7 (confidence 0.3729)
+test-digit.png -> 2 (confidence 0.9876)
+test-digit2.png -> 5 (confidence 0.9512)
+sample-03.jpg -> 8 (confidence 0.8934)
 
-Successfully processed: 7
+Successfully processed: 3
 Failed: 0
 ```
 
@@ -216,11 +212,15 @@ Failed files: bad.png
   one photo; the pipeline keeps the largest contour only.
 - **Photos should show a single, reasonably clean digit.** Large shadows, borders, or extra
   objects can confuse the contour-cropping step.
-- **Low confidence means a poor match.** As the example shows, confidence can be as low as
-  ~0.13 on photos that differ from MNIST's style.
+- **Low confidence means a poor match.** Confidence values well below 1.0 (sometimes under
+  0.5) are common on photos that differ from MNIST's clean, centered style — treat them as
+  uncertainty, not as a correct prediction.
 - **No benchmark results are claimed.** Test accuracy is printed at runtime by your own
   training run; the repository stores no metrics.
 - **Unseeded training.** Results vary slightly between runs.
+- **Minor numeric non-determinism at inference.** TensorFlow's oneDNN optimizations can
+  produce slightly different floating-point results between runs, which can flip the
+  prediction of borderline images.
 - **Legacy `.h5` model format.** Newer Keras versions may print deprecation warnings when
   loading models.
 - **Threshold 120 and blur 5×5 were tuned empirically** against the included sample photos;
